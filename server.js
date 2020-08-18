@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const prerender = require("prerender");
 const fsCache = require('./plugins/filesystem-cache');
+const healthcheck = require('./plugins/health-check');
+
 
 // borrow from https://github.com/prerender/prerender/blob/master/server.js
 var server = prerender({
@@ -20,5 +22,7 @@ server.use(prerender.blockResources());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(fsCache);
+server.use(healthcheck);
+
 
 server.start();
